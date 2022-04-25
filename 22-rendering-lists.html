@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 22</title>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.0.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.17.9/babel.js"></script>
+    <script type="text/babel">
+        const allItems = [
+            { id: 'a', value: 'apple' },
+            { id: 'o', value: 'orange' },
+            { id: 'g', value: 'grape' },
+            { id: 'p', value: 'pear' },
+        ]
+
+        function App() {
+            const [items, setItems] = React.useState(allItems);
+
+            function handleAdd() {
+                setItems([...items, allItems.find(i => !items.includes(i))]);
+            }
+
+            function handleRemove(item) {
+                setItems(items.filter(i => i !== item));
+            }
+
+            return (
+                <div>
+                    <button onClick={handleAdd} disabled={items.length === allItems.length}>add Item</button>
+                    <ul style={{ padding: 0, listStyle: 'none' }}>
+                        {items.map(item =>
+                            <li key={item.id}>
+                                <button onClick={() => handleRemove(item)}>Remove Item</button>
+                                <label htmlFor={`${item.value}-input`} style={{ padding: '0 10px' }}>{item.value}</label>
+                                <input id={`${item.value}-input`} defaultValue={item.value} />
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        // Render
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App />);
+
+    </script>
+</body>
+
+</html>
