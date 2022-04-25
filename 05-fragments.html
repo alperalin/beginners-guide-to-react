@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 05</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.0.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.17.9/babel.js"></script>
+    <script type="text/babel">
+        // ELEMENT
+        // With Direct API
+        // const helloElement = React.createElement('span', null, 'Hello');
+        // const worldElement = React.createElement('span', null, 'World');
+        // const element = React.createElement(React.Fragment, null, helloElement, ' ', worldElement);
+
+        // With JSX
+        // const element = (
+        //     <React.Fragment>
+        //         <span>Hello</span> <span>World</span>
+        //     </React.Fragment>
+        // );
+
+        // With Shorthand
+        const element = (
+            <>
+                <span>Hello</span> <span>World</span>
+            </>
+        );
+
+        // ROOT
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(element);
+    </script>
+</body>
+
+</html>
