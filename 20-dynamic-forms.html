@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 20</title>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.0.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.17.9/babel.js"></script>
+    <script type="text/babel">
+
+        function UsernameForm() {
+            const [username, setUsername] = React.useState('');
+            const isLowerCase = username === username.toLowerCase();
+            const error = isLowerCase ? null : 'Username must be lower case';
+
+            function handleSubmit(event) {
+                event.preventDefault();
+                alert(`You entered: ${username}`);
+            }
+
+            function handleChange(event) {
+                setUsername(event.target.value);
+            }
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="usernameInput">
+                            <input id="usernameInput" type="text" onChange={handleChange} autoComplete='off' />
+                        </label>
+                    </div>
+                    <div style={{ color: 'red' }}>
+                        {error}
+                    </div><br />
+
+                    <button type="submit" disabled={Boolean(error)}>Submit</button>
+                </form>
+            )
+        }
+
+        // Render
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<UsernameForm />);
+
+    </script>
+</body>
+
+</html>
