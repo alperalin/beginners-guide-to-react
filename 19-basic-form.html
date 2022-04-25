@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 19</title>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.0.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.17.9/babel.js"></script>
+    <script type="text/babel">
+
+        function UsernameForm() {
+            const inputRef = React.useRef();
+
+            function handleSubmit(event) {
+                event.preventDefault();
+                // const username = document.querySelector('input').value; // Breaks React component's encapsulation
+                // const username = event.target[0].value; // Based on the order of element. If order of input changes in the html, It will not work.
+                // const username = event.target.elements[0].value; // Based on the order of element. If order of input change in the html. It will not work.
+                // const username = inputRef.current.value; // If you don't need to Ref anywhere else, don't use it.
+                const username = event.target.elements.usernameInput.value;
+
+                alert(`You entered: ${username}`);
+            }
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="usernameInput">
+                            <input ref={inputRef} id="usernameInput" type="text" />
+                        </label>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            )
+        }
+
+        // Render
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<UsernameForm />);
+
+    </script>
+</body>
+
+</html>
