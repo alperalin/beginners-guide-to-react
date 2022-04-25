@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 15</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.0.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.17.9/babel.js"></script>
+    <script type="text/babel">
+        function useLocalStorageState(key, defaultValue = '') {
+            const [state, setState] = React.useState(() => window.localStorage.getItem(key) || defaultValue);
+
+            React.useEffect(() => {
+                window.localStorage.setItem(key, state);
+            }, [key, state]);
+
+            return [state, setState];
+        }
+
+        function App() {
+            const [name, setName] = useLocalStorageState('name');
+
+            function handleInput(event) {
+                setName(event.target.value)
+            }
+
+            return (
+                <div>
+                    <form>
+                        <label htmlFor="name">Name: </label>
+                        <input id='name' type="text" onChange={handleInput} value={name} />
+                    </form>
+                    <p>
+                        {name ? <strong>Hello {name}!</strong> : 'Please type your name'}
+                    </p>
+                </div>
+            )
+        }
+
+        // Render
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App />);
+
+    </script>
+</body>
+
+</html>
